@@ -318,5 +318,3 @@ function showPoem() {
         shapes: ['star']
     });
 }
-
-
