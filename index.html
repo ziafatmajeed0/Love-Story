@@ -6,117 +6,173 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Love Story</title>
     <link rel="stylesheet" href="style.css">
-
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@400;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600&family=Outfit:wght@400;600;700&display=swap"
         rel="stylesheet">
-
-    <!-- Confetti -->
+    <!-- Canvas Confetti -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 
 <body>
 
+    <!-- Background Elements -->
     <div class="hearts-bg" id="hearts-bg"></div>
+    <div class="music-control" id="music-control">
+        🎵
+    </div>
 
     <div class="app-container">
-
-        <!-- Landing -->
+        <!-- Screen 1: Landing -->
         <section id="screen-landing" class="screen active">
             <div class="content">
-                <h1>Hey Wardah Kanwal...</h1>
+                <h1 class="premium-title">Hey Wardah Kanwal...</h1>
                 <p class="typing-text">I made something just for you 💕</p>
-                <div class="premium-text">Ziafat & Wardah<br>Forever</div>
-                <button class="btn-primary pulse-anim" onclick="nextScreen()">Start Our Little Story 💌</button>
+                <div class="premium-text">Ziafat & Wardah <br> Forever</div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary pulse-anim" onclick="nextScreen()">👉 Start Our Little Story 💌</button>
+                </div>
             </div>
         </section>
 
-        <!-- Q1 -->
+        <!-- Screen 2: Q1 - First Fall -->
         <section id="screen-q1" class="screen hidden">
             <div class="content">
                 <h2>When did I first fell for you?</h2>
                 <div class="options-grid">
-                    <button class="card-btn" onclick="handleAnswer('q1')">Not remember 💬</button>
-                    <button class="card-btn" onclick="handleAnswer('q1')">When I saw you 😊</button>
-                    <button class="card-btn" onclick="handleAnswer('q1')">First meeting ✨</button>
-                    <button class="card-btn" onclick="handleAnswer('q1')">From day one 💖</button>
+                    <button class="card-btn" onclick="handleAnswer('q1', 'chat')">not remember 💬</button>
+                    <button class="card-btn" onclick="handleAnswer('q1', 'smile')">when I saw you 😊</button>
+                    <button class="card-btn" onclick="handleAnswer('q1', 'meeting')">First meeting ✨</button>
+                    <button class="card-btn" onclick="handleAnswer('q1', 'dayone')">From day one 💖</button>
+                </div>
+                <div id="q1-feedback" class="feedback hidden">
+                    <div class="big-heart">💗</div>
+                    <p>You always had my heart</p>
                 </div>
             </div>
         </section>
 
-        <!-- Q2 -->
+        <!-- Screen 3: Q2 - Travel -->
         <section id="screen-q2" class="screen hidden">
             <div class="content">
                 <h2>Where do you want us to travel next?</h2>
                 <div class="image-grid">
-                    <div class="image-card" onclick="handleAnswer('q2')">
-                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34" />
+                    <div class="image-card" onclick="handleAnswer('q2', 'paris')">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=300&q=80"
+                            alt="Paris">
                         <span>Paris</span>
                     </div>
-                    <div class="image-card" onclick="handleAnswer('q2')">
-                        <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99" />
-                        <span>Switzerland</span>
+                    <div class="image-card" onclick="handleAnswer('q2', 'switzerland')">
+                        <img src="https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=300&q=80"
+                            alt="Switzerland">
+                        <span>Switzerland 🏔️</span>
                     </div>
-                    <div class="image-card" onclick="handleAnswer('q2')">
-                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8" />
+                    <div class="image-card" onclick="handleAnswer('q2', 'maldives')">
+                        <img src="https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=300&q=80"
+                            alt="Maldives">
                         <span>Maldives</span>
                     </div>
-                    <div class="image-card" onclick="handleAnswer('q2')">
-                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800" />
+                    <div class="image-card" onclick="handleAnswer('q2', 'anywhere')">
+                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=300&q=80"
+                            alt="Anywhere">
                         <span>Anywhere with you 🥹</span>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Date -->
-        <section id="screen-date" class="screen hidden">
-            <div class="content">
-                <h2>When did you say "I love you" first? 🥺</h2>
-                <div class="options-grid">
-                    <button class="card-btn" onclick="handleDate(false)">25 JAN</button>
-                    <button class="card-btn" onclick="handleDate(true)">22 JAN 💖</button>
-                    <button class="card-btn" onclick="handleDate(false)">31 DEC</button>
-                    <button class="card-btn" onclick="handleDate(false)">14 JAN</button>
+                <div id="q2-feedback" class="feedback hidden">
+                    <div class="plane-anim">✈️💕</div>
+                    <p>Packing memories already 😍</p>
                 </div>
             </div>
         </section>
 
-        <!-- Photo -->
+        <!-- Screen 3.5: Date Question -->
+        <section id="screen-date" class="screen hidden">
+            <div class="content">
+                <h2>When did you said "I Love U" 1st time? 🥺</h2>
+                <div class="options-grid">
+                    <button class="card-btn" onclick="handleDateAnswer('wrong')">25 JAN 2026</button>
+                    <button class="card-btn" onclick="handleDateAnswer('correct')">22 JAN 2026</button>
+                    <button class="card-btn" onclick="handleDateAnswer('wrong')">31 DEC 2026</button>
+                    <button class="card-btn" onclick="handleDateAnswer('wrong')">14 JAN 2026</button>
+                </div>
+                <!-- Feedback Container needs to be empty initially -->
+                <div id="date-feedback" class="feedback hidden"></div>
+            </div>
+        </section>
+
+        <!-- Screen 4: Q3 - Photo Memory -->
         <section id="screen-q3" class="screen hidden">
             <div class="content">
                 <h2>Where did we click this photo?</h2>
                 <div class="photo-container">
-                    <img src="image.jpeg" class="blur-img">
+                    <!-- User's custom image -->
+                    <img src="image.jpeg" class="blur-img" alt="Us" style="filter: none;">
                 </div>
-                <input id="photo-guess" placeholder="Type anything 💕">
-                <button class="btn-secondary" onclick="checkPhoto()">Submit</button>
+                <div class="input-area">
+                    <input type="text" id="photo-guess" placeholder="Type your guess...">
+                    <button class="btn-secondary" onclick="checkPhotoAnswer()">Submit</button>
+                </div>
+                <div id="q3-feedback" class="feedback hidden">
+                    <p id="q3-text"></p>
+                </div>
             </div>
         </section>
 
-        <!-- Proposal -->
+
+
+        <!-- Screen 5: Proposal -->
         <section id="screen-proposal" class="screen hidden">
             <div class="content">
-                <h2>Will you be my Valentine? 🌹</h2>
+                <h2 class="proposal-text">Wardah, will you be my Valentine? 🌹</h2>
                 <div class="proposal-buttons">
-                    <button class="btn-yes" onclick="acceptProposal()">YES 💖</button>
-                    <button id="no-btn" class="btn-no" onmouseover="moveNoButton()">NO 😈</button>
+                    <button id="yes-btn" class="btn-yes" onclick="acceptProposal()">💖 YES</button>
+                    <button id="no-btn" class="btn-no" onmouseover="moveNoButton()" onclick="moveNoButton()">😈
+                        NO</button>
                 </div>
             </div>
         </section>
 
-        <!-- Ending -->
+        <!-- Screen 6: Ending -->
         <section id="screen-ending" class="screen hidden">
             <div class="content">
-                <h1>Yayyy! 💘</h1>
-                <p>You are officially my Valentine ❤️</p>
+                <h1 class="celebration-text">Yayyy! <br> Meri JAN You’re officially my Valentine 💘</h1>
+                <p>I love you so much ❤️</p>
                 <div class="beating-heart-big">💓</div>
-                <button class="btn-primary" onclick="location.reload()">Replay 🔁</button>
+
+                <p class="footer-msg">This little website will always remind me of us 💖</p>
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">👉 Replay Our Story 🔁</button>
+                    <br><br>
+                    <button class="btn-secondary pulse-anim" onclick="showPoem()"
+                        style="background: gold; color: #590d22; font-family: 'Outfit', sans-serif; font-weight: bold; font-size: 1.2rem;">Read
+                        My Poem For You 📜</button>
+                </div>
             </div>
         </section>
 
+        <!-- Screen 7: Love Poem (Ghazal) - Hidden until requested -->
+        <section id="screen-poetry" class="screen hidden" style="z-index: 200;">
+            <div class="content">
+                <h2 class="poetry-title">For You, My Love... 🌹</h2>
+                <div class="poem-card">
+                    <p class="verse">"In every heartbeat, your name does reside,</p>
+                    <p class="verse">With you, my love, I have nothing to hide.</p>
+                    <p class="verse">Like stars that guide the wanderer home,</p>
+                    <p class="verse">You are my light, my world, my guide."</p>
+                    <br>
+                    <p class="verse">"From moments we share to dreams we weave,</p>
+                    <p class="verse">In your love, Wardah, I truly believe.</p>
+                    <p class="verse">So hold my hand, let’s fly above,</p>
+                    <p class="verse">Forever yours, Ziafat, bound by love."</p>
+                </div>
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">Start Over 💖</button>
+                </div>
+            </div>
+        </section>
     </div>
 
     <script src="script.js"></script>
