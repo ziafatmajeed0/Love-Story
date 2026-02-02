@@ -161,11 +161,14 @@ function moveNoButton() {
 
     // Get viewport dimensions (safe zone)
     // Reduce margin to keep it well within screen
-    const maxX = window.innerWidth - btn.offsetWidth - 40;
-    const maxY = window.innerHeight - btn.offsetHeight - 40;
+    // Get viewport dimensions (safe zone)
+    // Reduce margin to keep it well within screen
+    // Safety check: ensure we have positive space
+    const maxX = Math.max(0, window.innerWidth - btn.offsetWidth - 20);
+    const maxY = Math.max(0, window.innerHeight - btn.offsetHeight - 20);
 
-    const randomX = Math.max(20, Math.random() * maxX); // At least 20px from edge
-    const randomY = Math.max(20, Math.random() * maxY);
+    const randomX = Math.max(10, Math.random() * maxX); // At least 10px from edge
+    const randomY = Math.max(10, Math.random() * maxY);
 
     // Random Rotate
     const randomRotate = (Math.random() - 0.5) * 45;
