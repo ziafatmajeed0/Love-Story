@@ -466,6 +466,8 @@ h1 {
     .app-container {
         width: 100%;
         height: 100vh;
+        height: 100dvh;
+        /* specialized for mobile browsers */
         /* Full height */
         max-width: 100%;
         border-radius: 0;
@@ -539,8 +541,11 @@ h1 {
     }
 
     .screen {
-        padding: 1rem;
-        justify-content: center;
+        padding: 4rem 1rem 10rem 1rem;
+        /* Top padding for visual center, Bottom for scroll */
+        justify-content: flex-start;
+        /* Prevent clipping */
+        overflow-y: auto;
     }
 
     /* Improve spacing for short screens */
@@ -559,6 +564,10 @@ h1 {
 
     .proposal-buttons {
         margin-top: 1rem;
+    }
+
+    .poem-card {
+        margin-bottom: 2rem;
     }
 }
 
