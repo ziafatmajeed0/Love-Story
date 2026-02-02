@@ -400,6 +400,10 @@ h1 {
     transform: translate(-50%, -50%);
     width: 85%;
     max-width: 400px;
+    max-height: 85vh;
+    /* Prevent overflowing screen height */
+    overflow-y: auto;
+    /* Allow scrolling if content is too tall */
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -666,6 +670,23 @@ h1 {
 
     .proposal-buttons {
         gap: 1rem;
+    }
+
+    /* Feedback Box Mobile Adjustments */
+    .feedback {
+        padding: 2rem 1.5rem;
+        /* Less padding on mobile */
+        width: 90%;
+    }
+
+    .feedback p {
+        font-size: 1.5rem;
+        /* Slightly smaller text */
+    }
+
+    .big-emoji {
+        font-size: 4rem;
+        margin-bottom: 0.5rem;
     }
 }
 
