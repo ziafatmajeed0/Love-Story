@@ -332,7 +332,22 @@ h1 {
     position: relative;
 }
 
-/* ... existing before/after ... */
+/* Tape Effect */
+.photo-container::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+}
+
 .photo-container::after {
     content: '❤️ Us ❤️';
     position: absolute;
@@ -345,7 +360,11 @@ h1 {
     color: #590d22;
 }
 
-/* ... existing hover ... */
+.photo-container:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 50;
+}
+
 .blur-img {
     width: 100%;
     display: block;
@@ -359,9 +378,49 @@ h1 {
     justify-content: center;
     flex-wrap: wrap;
     /* Wrap on very small screens */
+    align-items: center;
+    /* Ensure alignment */
 }
 
-/* ... existing input styles ... */
+/* RESTORED INPUT STYLES */
+.input-area input {
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.7);
+    outline: none;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-color);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.input-area input:focus {
+    background: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 10px rgba(164, 22, 26, 0.2);
+}
+
+/* RESTORED SUBMIT BUTTON */
+.btn-secondary {
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, #c9184a, #ff4d6d);
+    color: white;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(201, 24, 74, 0.3);
+    transition: transform 0.2s, box-shadow 0.2s;
+    animation: bounce 1s infinite;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(201, 24, 74, 0.4);
+}
 
 /* --- Feedback Overlay --- */
 .feedback {
@@ -382,16 +441,158 @@ h1 {
     z-index: 9999;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.8);
-    animation: elasticPop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* Animation must be handled by class addition/removal or keep it simple */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transform: translate(-50%, -50%) scale(0.8);
 }
 
-/* ... existing feedback p/emoji ... */
+/* When active, we add a class or just rely on 'hidden' removal logic? 
+   The script removes 'hidden' class. Let's ensure 'hidden' controls this fully. 
+*/
+.feedback:not(.hidden) {
+    opacity: 1;
+    pointer-events: all;
+    transform: translate(-50%, -50%) scale(1);
+    animation: elasticPop 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
 
-/* ... existing animations ... */
+.feedback p {
+    font-size: 1.8rem;
+    font-weight: 800;
+    line-height: 1.2;
+    background: linear-gradient(45deg, #ff0055, #ff0a43);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 1rem;
+    /* animation: fadeInUp 0.5s ease-out 0.2s backwards; <-- This might conflict if display none */
+}
+
+.big-emoji {
+    font-size: 4rem;
+    display: block;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 10px 10px rgba(0, 0, 0, 0.1));
+    animation: bounce 1s infinite alternate;
+}
+
+/* Animations */
+@keyframes elasticPop {
+    0% {
+        transform: translate(-50%, -50%) scale(0);
+        opacity: 0;
+    }
+
+    60% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+
+    80% {
+        transform: translate(-50%, -50%) scale(0.95);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes heartBeat {
+    0% {
+        transform: scale(1);
+    }
+
+    14% {
+        transform: scale(1.3);
+    }
+
+    28% {
+        transform: scale(1);
+    }
+
+    42% {
+        transform: scale(1.3);
+    }
+
+    70% {
+        transform: scale(1);
+    }
+}
+
+@keyframes flyPlane {
+    from {
+        transform: translateY(0) rotate(0);
+    }
+
+    to {
+        transform: translateY(-10px) rotate(10deg);
+    }
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    25% {
+        transform: translate(-52%, -50%) rotate(-5deg);
+    }
+
+    75% {
+        transform: translate(-48%, -50%) rotate(5deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+}
+
+.shake-anim {
+    animation: shake 0.5s ease-in-out;
+    border-color: red !important;
+    background: #fff0f0 !important;
+}
+
+.big-heart {
+    font-size: 4rem;
+    animation: heartBeat 1.2s infinite;
+}
+
+.plane-anim {
+    font-size: 4rem;
+    animation: flyPlane 1.5s infinite alternate;
+}
+
 
 /* --- Proposal Buttons --- */
 .proposal-buttons {
@@ -419,6 +620,10 @@ h1 {
     z-index: 10;
 }
 
+.btn-yes:hover {
+    transform: scale(1.1) rotate(-3deg);
+}
+
 .btn-no {
     background: #d00000;
     color: white;
@@ -432,6 +637,8 @@ h1 {
     transition: all 0.3s ease;
     z-index: 20;
 }
+
+/* ... existing hover ... */
 
 /* --- Ending Screen --- */
 .celebration-text {
@@ -448,9 +655,24 @@ h1 {
     margin: 1.5rem 0;
 }
 
-/* ... footer ... */
+.footer-msg {
+    margin-bottom: 2rem;
+    font-style: italic;
+    opacity: 0.8;
+}
 
-/* ... music control ... */
+/* Music Control */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    font-size: 1.5rem;
+}
 
 /* --- Responsive Media Queries --- */
 
@@ -477,6 +699,19 @@ h1 {
         /* Less blur for performance? Keep it nice though. */
         box-shadow: none;
         /* Remove frame shadow */
+    }
+
+    /* Improved Container for Scrolling */
+    .screen {
+        padding: 1rem 1rem 10rem 1rem;
+        /* Generous bottom padding */
+        justify-content: flex-start;
+        /* Prevent top clipping */
+    }
+
+    .content {
+        margin: auto 0;
+        width: 100%;
     }
 
     h1 {
@@ -508,17 +743,16 @@ h1 {
         font-size: 1.2rem;
     }
 
-    .screen {
-        padding: 1rem 1rem 10rem 1rem;
-        /* Generous bottom padding for scrolling */
-        justify-content: flex-start;
-        /* Prevent top clipping on overflow */
+    /* Poem Specific Mobile Fixes */
+    .poem-card {
+        padding: 1.2rem;
+        margin-bottom: 3rem;
+        max-width: 95%;
     }
 
-    .content {
-        margin: auto 0;
-        /* Vertically center if small, scroll if big */
-        width: 100%;
+    .verse {
+        font-size: 1.1rem;
+        line-height: 1.4;
     }
 }
 
@@ -541,10 +775,9 @@ h1 {
     }
 
     .screen {
-        padding: 4rem 1rem 10rem 1rem;
-        /* Top padding for visual center, Bottom for scroll */
+        padding: 3rem 1rem 8rem 1rem;
+        /* Ensure top space and bottom space */
         justify-content: flex-start;
-        /* Prevent clipping */
         overflow-y: auto;
     }
 
@@ -593,18 +826,70 @@ h1 {
     overflow: hidden;
 }
 
-/* ... existing sheen ... */
+/* Sheen Effect */
+.poem-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+    animation: sheen 3s infinite;
+}
+
+@keyframes sheen {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
 
 .verse {
     font-family: var(--font-body);
     font-size: 1.1rem;
     /* Smaller text for reading */
-    line-height: 1.5;
-    color: #800f2f;
+    line-height: 1.6;
+    color: #000000;
+    /* FIXED: Black Color for visibility */
     margin-bottom: 0.5rem;
     opacity: 0;
     font-weight: 600;
     animation: fadeInUp 0.8s ease-out forwards;
 }
 
-/* ... existing verse delays ... */
+/* Verse Delays */
+.verse:nth-child(1) {
+    animation-delay: 0.5s;
+}
+
+.verse:nth-child(2) {
+    animation-delay: 1.5s;
+}
+
+.verse:nth-child(3) {
+    animation-delay: 2.5s;
+}
+
+.verse:nth-child(4) {
+    animation-delay: 3.5s;
+}
+
+.verse:nth-child(6) {
+    animation-delay: 4.5s;
+}
+
+.verse:nth-child(7) {
+    animation-delay: 5.5s;
+}
+
+.verse:nth-child(8) {
+    animation-delay: 6.5s;
+}
+
+.verse:nth-child(9) {
+    animation-delay: 7.5s;
+}
