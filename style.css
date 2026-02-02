@@ -507,7 +507,16 @@ h1 {
     }
 
     .screen {
-        padding: 1rem;
+        padding: 1rem 1rem 10rem 1rem;
+        /* Generous bottom padding for scrolling */
+        justify-content: flex-start;
+        /* Prevent top clipping on overflow */
+    }
+
+    .content {
+        margin: auto 0;
+        /* Vertically center if small, scroll if big */
+        width: 100%;
     }
 }
 
